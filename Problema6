@@ -1,1 +1,37 @@
 
+library(ggplot2) #cargamos librerias
+
+# Parámetros del sistema
+lambda <- 10  # Tasa de llegada
+mu <- 12      # Tasa de servicio
+
+# EJERCICIO1
+P0 <- 1 - (lambda / mu)
+p <- (lambda / mu) #Calculo p para usarlo mas tarde
+
+# 2. Tiempo esperado total en el sistema
+
+n <- p/(1-p) #calculamos n y t igual que hemos hecho en los ejercicios
+t <- n/lambda
+
+# 3. Número medio de programas en la cola
+Q <- lambda * (p/(mu*(1-p))) #calculamos w dentro de q
+
+# Imprimir resultados
+cat("Proporción de tiempo que el servidor está desocupado:", P0, "\n")
+cat("Tiempo esperado total de salida de un programa:", t, "\n")
+cat("Número medio de programas esperando en la cola:", Q, "\n")
+
+# 4. Gráfico
+mu_values <- seq(10.1, 20, by = 0.1)  # Evitamos división por cero en mu - lambda
+N_values <- lambda / (mu_values - lambda)  # Número medio total de programas en el sistema
+
+df <- data.frame(mu_values, N_values)
+
+ggplot(df, aes(x = mu_values, y = N_values)) +
+  geom_line(color = "blue") +
+  labs(title = "Número medio de programas en el sistema vs. μ",
+       x = "Tasa de servicio (μ)",
+       y = "Número medio de programas en el sistema (N)") +
+  theme_minimal()
+
