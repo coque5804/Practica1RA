@@ -1,0 +1,17 @@
+
+library(queueing)
+
+# Parámetros
+lambda <- 1.25 / 8  # tasa de llegada por hora (1.25 análisis por 8 horas)
+mu <- 1 / 3.33  # tasa de servicio por hora (1 análisis cada 3.33 horas)
+c <- 1  # número de sandboxes disponibles
+n <- 10  # número de unidades (puedes ajustarlo según tu necesidad)
+
+# Crear el modelo M/M/c
+i_mmck <- NewInput.MMC(lambda = lambda, mu = mu, c = c, n = n, method = 0)
+
+# Simular el modelo de colas
+o_mmck <- QueueingModel(i_mmck)
+
+# Mostrar el reporte del modelo
+Report(o_mmck)
