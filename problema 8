@@ -1,0 +1,14 @@
+library(queueing)
+
+# Definir los parámetros del modelo M/M/c/K
+lambda <- 100  # Tasa de llegada (solicitudes por segundo)
+mu <- 1 / 0.03  # Tasa de servicio (solicitudes por segundo)
+c <- 3  # Número de cores
+K <- 12  # Tamaño del buffer
+
+# Crear el modelo M/M/c/K
+i_mmck <- NewInput.MMCK(lambda=lambda, mu=mu, c=c, k=K)
+o_mmck <- QueueingModel(i_mmck)
+
+# Generar el reporte del modelo
+Report(o_mmck)
